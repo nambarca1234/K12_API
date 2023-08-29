@@ -33,15 +33,15 @@ public class CustomerServiceImpl extends BaseResponse implements CustomerService
     @Override
     public ResponseEntity<?> getListCustomerPaging(int page, int size, String propSortName) {
         //phan trang lay domain
-        Pageable pageable = PageRequest.of(page,size,
-                Sort.by(Sort.Direction.ASC,propSortName));
-        Page<Customer> pageCus =customerRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page, size,
+                Sort.by(Sort.Direction.ASC, propSortName));
+        Page<Customer> pageCus = customerRepository.findAll(pageable);
         return getResponseEntity(pageCus);
     }
 
     @Override
     public ResponseEntity<?> save(Customer customer) {
-        Customer customer1= customerRepository.save(customer);
+        Customer customer1 = customerRepository.save(customer);
         return getResponseEntity(customer1);
     }
 
@@ -58,17 +58,28 @@ public class CustomerServiceImpl extends BaseResponse implements CustomerService
     }
 
     @Override
+    public ResponseEntity<?> search(int key, String value) {
+//        Pageable pageable =PageRequest.of(0,4);
+        switch (key) {
+            case 1:
+                return getResponseEntity(customerRepository.findByCusnameIgnoreCase(value));
+            case 2:
+                return getResponseEntity(customerRepository.findByPhoneIgnoreCase(value));
+            case 3:
+                return getResponseEntity(customerRepository.findByAidIgnoreCase(Integer.parseInt(value)));
+        }
+        return null;
+    }
+
+    @Override
     public ResponseEntity<?> getListPurchased() {
-        List<Map<String, Object>> maps= customerRepository.getListPurchased();
+        List<Map<String, Object>> maps = customerRepository.getListPurchased();
         ObjectMapper objectMapper = new ObjectMapper();
         List<CustomerDTO> customerDTOS = new ArrayList<>();
-        for (Map m:maps) {
-            CustomerDTO customerDTO = objectMapper.convertValue(m,CustomerDTO.class);
+        for (Map m : maps) {
+            CustomerDTO customerDTO = objectMapper.convertValue(m, CustomerDTO.class);
             customerDTOS.add(customerDTO);
         }
-
-
-
         return getResponseEntity(customerDTOS);
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/customer")
+@CrossOrigin("*")  //cho phep tat ca cac port gọi vào
+
 public class CustomerController {
     @Autowired
     CustomerService customerService;
@@ -22,6 +24,11 @@ public class CustomerController {
                                                     @RequestParam int size,
                                                     @RequestParam String sort){
         return customerService.getListCustomerPaging(page,size,sort);
+    }
+
+    @GetMapping("/search")
+    private ResponseEntity<?> search(@RequestParam int key, @RequestParam String search){
+        return customerService.search(key,search);
     }
 
     @PostMapping("/save")
