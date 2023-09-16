@@ -82,4 +82,9 @@ public class CustomerServiceImpl extends BaseResponse implements CustomerService
         }
         return getResponseEntity(customerDTOS);
     }
+
+    @Override
+    public ResponseEntity<?> findCusById(int id) {
+        return getResponseEntity(customerRepository.findCusById(id));
+    }
 }

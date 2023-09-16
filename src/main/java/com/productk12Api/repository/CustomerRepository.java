@@ -27,4 +27,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     List<Customer> findByPhoneIgnoreCase(String phone);
     @Query(value = "select c from Customer c where c.aid=?1")
     List<Customer> findByAidIgnoreCase(int aid);
+    @Query(value = "select c.*, a.province as address from customer c , address a \n" +
+            "where c.cusid = ? and c.aid = a.aid", nativeQuery = true)
+    Map<String, Object> findCusById(int id);
+
 }

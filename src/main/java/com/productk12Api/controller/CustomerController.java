@@ -40,6 +40,10 @@ public class CustomerController {
     private ResponseEntity<?> find(@RequestParam int id){
         return customerService.findById(id);
     }
+    @GetMapping("/findCusById")
+    private ResponseEntity<?> findCusById(@RequestParam int id){
+        return customerService.findCusById(id);
+    }
     @GetMapping("/getListPurchased")
     private ResponseEntity<?> getListPurchased(){
         return customerService.getListPurchased();

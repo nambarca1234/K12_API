@@ -11,4 +11,6 @@ public interface CustomerService {
     ResponseEntity<?> findById(int id);
     ResponseEntity<?> search(int key, String value);
     ResponseEntity<?> getListPurchased();
+
+    ResponseEntity<?> findCusById(int id);
 }
