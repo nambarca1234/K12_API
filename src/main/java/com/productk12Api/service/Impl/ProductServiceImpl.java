@@ -78,5 +78,8 @@ public class ProductServiceImpl extends BaseResponse implements ProductService {
         return getResponseEntity(productDTOList);
     }
 
-
+    //test:
+    public int cul(int x, int y) {
+        return x + y;
+    }
 }

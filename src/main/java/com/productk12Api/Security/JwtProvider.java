@@ -28,7 +28,7 @@ public class JwtProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
         }catch (Exception e){
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
     public String getUsername(String token){
